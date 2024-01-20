@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openapitools.sdk.enums.AdditionalParameters;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -105,9 +108,12 @@ public class Utils {
     }
 
     public static boolean validateURL(String url) {
-        String pattern = "https?://(?:w{1,3}\\.)?[^\\s.]+(?:\\.[a-z]+)*(?::\\d+)?(?![^<]*(?:<\\/?\\w+>|\\/?>))";
-//        return Pattern.matches(pattern,url);
-        return url.matches(pattern);
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (MalformedURLException | URISyntaxException e) {
+            return false;
+        }
     }
 
     public static Map<String, Object> parseJWT(String token) {
