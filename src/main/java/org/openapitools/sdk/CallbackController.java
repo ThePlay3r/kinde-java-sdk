@@ -107,7 +107,7 @@ public class CallbackController {
 //            String redirectUrl = appConfig.getPostLoginURL() != null
 //                    ? appConfig.getPostLoginURL()
 //                    : logoutRedirectUri;
-            String redirectUrl = kindeClientSDK.getLogoutRedirectUri();
+            String redirectUrl = kindeClientSDK.getLoginRedirectUri();
             return new RedirectView(redirectUrl);
 //            return new RedirectView("");
         } else {

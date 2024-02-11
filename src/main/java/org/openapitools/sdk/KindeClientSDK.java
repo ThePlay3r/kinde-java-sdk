@@ -34,6 +34,7 @@ public class KindeClientSDK {
     private String domain;
     private String redirectUri;
     private String logoutRedirectUri;
+    private String loginRedirectUri;
     private String clientId;
     private String clientSecret;
     private String authorizationEndpoint;
@@ -55,6 +56,10 @@ public class KindeClientSDK {
 
     public String getLogoutRedirectUri() {
         return logoutRedirectUri;
+    }
+
+    public String getLoginRedirectUri() {
+        return loginRedirectUri;
     }
 
     public String getClientId() {
@@ -95,6 +100,11 @@ public class KindeClientSDK {
 
     public Storage getStorage() {
         return storage;
+    }
+
+    public KindeClientSDK withLoginRedirectUri(String loginRedirectUri) {
+        this.loginRedirectUri = loginRedirectUri;
+        return this;
     }
 
     public KindeClientSDK() {
@@ -155,6 +165,7 @@ public class KindeClientSDK {
         this.additionalParameters = Utils.checkAdditionalParameters(additionalParameters);
 
         this.logoutRedirectUri = logoutRedirectUri;
+        this.loginRedirectUri = redirectUri;
 
         if (scopes == null || scopes.equals("")) {
             scopes = "openid profile email offline";
