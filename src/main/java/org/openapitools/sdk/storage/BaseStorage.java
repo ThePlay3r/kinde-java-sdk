@@ -92,6 +92,9 @@ public class BaseStorage {
     }
 
     public static void setItem(HttpServletResponse response, String key, String value, int expiresOrOptions, String path, String domain, boolean secure, boolean httpOnly) {
+        if (path == null || path.isEmpty()) {
+            path = "/";
+        }
         String newKey = getKey(key);
         Cookie cookie = new Cookie(newKey, value);
         cookie.setMaxAge(expiresOrOptions);
