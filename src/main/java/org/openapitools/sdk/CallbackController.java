@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URLEncoder;
+import java.time.Duration;
 import java.util.Map;
 
 //@Controller
@@ -88,8 +89,7 @@ public class CallbackController {
 
                     String newKey = "kinde" + '_' + StorageEnums.TOKEN.getValue();
                     Cookie cookie = new Cookie(newKey, URLEncoder.encode(new ObjectMapper().writeValueAsString((Map<String, Object>) data_), "UTF-8"));
-                    Long exp = System.currentTimeMillis() + 3600 * 24 * 15 * 1000;
-                    cookie.setMaxAge(exp.intValue());
+                    cookie.setMaxAge((int) Duration.ofDays(15).getSeconds());
 //                    long currentTimeSeconds = System.currentTimeMillis() / 1000;
 //                    cookie.setMaxAge((int) ((long) (Integer) payload.get("exp")- currentTimeSeconds));
                     cookie.setPath("/");
